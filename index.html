@@ -98,8 +98,19 @@
     }
 
     body {
-      cursor: none;
       overflow-x: hidden;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+
+      #cursor-dot,
+      #cursor-outline {
+        display: none !important;
+      }
+
+      body {
+        cursor: auto !important;
+      }
     }
 
     /* Noise Texture Overlay */
@@ -161,29 +172,7 @@
       transition-delay: 0.35s;
     }
 
-    /* Custom Cursor */
-    #cursor-dot {
-      width: 8px;
-      height: 8px;
-      background: #8eff71;
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 10000;
-      transition: transform 0.1s ease;
-    }
 
-    #cursor-outline {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(142, 255, 113, 0.4);
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-        width 0.3s ease, height 0.3s ease;
-    }
 
     /* Parallax Container */
     .parallax-wrap {
@@ -196,15 +185,50 @@
       will-change: transform;
     }
 
-    /* Smooth Nav */
+    /* Header Entrance & Transitions */
     header {
-      transition: padding 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      transform: translateY(-100%);
+      transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+        padding 0.5s cubic-bezier(0.16, 1, 0.3, 1),
         background 0.5s ease;
     }
 
+    body.loaded header {
+      transform: translateY(0);
+    }
+
     header.scrolled {
-      padding: 0.5rem 0;
-      background: rgba(14, 14, 14, 0.95);
+      padding: 0.25rem 0;
+      background: rgba(14, 14, 14, 0.98);
+      border-bottom: 1px solid rgba(142, 255, 113, 0.1);
+    }
+
+    /* Kinetic Underline Animation */
+    .nav-link {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #8eff71;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+      left: 0;
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+      left: 0;
     }
 
     /* Premium Highlights */
@@ -229,8 +253,6 @@
 </head>
 
 <body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
-  <div id="cursor-dot"></div>
-  <div id="cursor-outline"></div>
   <!-- TopNavBar Shell -->
   <header
     class="fixed top-0 w-full z-50 bg-[#0e0e0e]/80 backdrop-blur-xl bg-gradient-to-b from-[#0e0e0e] to-transparent shadow-[0_0_20px_rgba(142,255,113,0.1)]">
@@ -239,21 +261,21 @@
         Bicon 3.0
       </div>
       <div class="hidden md:flex items-center gap-10">
-        <a class="font-headline font-extrabold uppercase tracking-tighter text-[#8eff71] border-b-2 border-[#8eff71] pb-1"
+        <a class="nav-link active font-headline font-extrabold uppercase tracking-tighter text-[#8eff71] pb-1"
           href="#">Home</a>
-        <a class="font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors"
+        <a class="nav-link font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors pb-1"
           href="#programs">Programs</a>
-        <a class="font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors"
+        <a class="nav-link font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors pb-1"
           href="#trainers">Trainers</a>
-        <a class="font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors"
+        <a class="nav-link font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors pb-1"
           href="#gallery">Gallery</a>
-        <a class="font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors"
+        <a class="nav-link font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors pb-1"
           href="#contact">Contact</a>
       </div>
-      <button
-        class="magnetic-btn bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-extrabold uppercase tracking-tighter px-6 py-2 rounded-md hover:scale-105 hover:shadow-[0_0_15px_rgba(142,255,113,0.3)] duration-300 active:scale-95 transition-all">
+      <a href="https://wa.me/917751903836?text=Hi Bicon Gym, I want to join!"
+        class="magnetic-btn bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-extrabold uppercase tracking-tighter px-6 py-2 rounded-md hover:scale-105 hover:shadow-[0_0_15px_rgba(142,255,113,0.3)] duration-300 active:scale-95 transition-all text-center">
         Join Now
-      </button>
+      </a>
     </nav>
   </header>
   <main>
@@ -276,14 +298,14 @@
             Train at Balasore's most advanced fitness center. Engineered for performance, designed for results.
           </p>
           <div class="flex flex-wrap gap-6 reveal stagger-3">
-            <button
-              class="magnetic-btn bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-extrabold uppercase tracking-tighter px-10 py-4 rounded-md hover:scale-105 transition-all text-lg shadow-[0_10px_20px_rgba(142,255,113,0.2)]">
+            <a href="https://wa.me/917751903836?text=Hi Bicon Gym, I want to join!"
+              class="magnetic-btn bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-extrabold uppercase tracking-tighter px-10 py-4 rounded-md hover:scale-105 transition-all text-lg shadow-[0_10px_20px_rgba(142,255,113,0.2)] text-center">
               Join Now
-            </button>
-            <button
-              class="magnetic-btn border border-outline-variant text-on-background font-headline font-extrabold uppercase tracking-tighter px-10 py-4 rounded-md hover:bg-surface-bright transition-all text-lg backdrop-blur-sm">
+            </a>
+            <a href="#programs"
+              class="magnetic-btn border border-outline-variant text-on-background font-headline font-extrabold uppercase tracking-tighter px-10 py-4 rounded-md hover:bg-surface-bright transition-all text-lg backdrop-blur-sm text-center">
               Explore Programs
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -480,6 +502,59 @@
         </div>
       </div>
     </section>
+    <!-- Founder Section: Bicon Dash -->
+    <section class="py-32 bg-background relative overflow-hidden" id="founder">
+      <div
+        class="absolute right-0 top-0 h-full w-[1px] bg-gradient-to-b from-transparent via-primary/20 to-transparent">
+      </div>
+      <div class="max-w-screen-2xl mx-auto px-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+          <!-- Text Content -->
+          <div class="md:col-span-7 reveal">
+            <h2 class="font-headline text-2xl font-bold uppercase tracking-widest text-primary mb-6 italic">The
+              Visionary
+            </h2>
+            <h3
+              class="font-headline text-5xl md:text-7xl font-extrabold uppercase tracking-tighter leading-[0.9] mb-8 group">
+              Meet <span class="text-primary italic group-hover:text-white transition-colors">Bicon Dash</span>
+            </h3>
+            <div class="space-y-6 text-on-surface-variant text-lg md:text-xl font-light leading-relaxed max-w-2xl">
+              <p>
+                Founder of Balasore's premier fitness ecosystem, Bicon Dash envisioned a space where biological
+                potential meets kinetic perfection.
+              </p>
+              <p>
+                With over 12 years of specialized training in high-performance bodybuilding and sports nutrition, Dash
+                engineered Bicon 3.0 to be more than a gym—it's a performance lab.
+              </p>
+            </div>
+            <div class="mt-12 group reveal stagger-2">
+              <div
+                class="text-stroke font-headline text-4xl block opacity-50 select-none group-hover:opacity-100 transition-opacity">
+                Bicon Dash
+              </div>
+              <span class="text-xs uppercase tracking-[0.3em] font-headline text-primary">Founder &amp; Head
+                Coach</span>
+            </div>
+          </div>
+          <!-- Founder Image -->
+          <div class="md:col-span-5 relative">
+            <div
+              class="parallax-wrap aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 reveal-scale shadow-2xl">
+              <img
+                class="w-full h-full object-cover grayscale brightness-90 hover:brightness-110 transition-all duration-1000 parallax-img"
+                data-alt="portrait of an athletic man in a black tank top standing in a moodily lit high-end gym, looking focused and determined"
+                src="Pasted image (2).png" />
+              <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background to-transparent opacity-60">
+              </div>
+            </div>
+            <!-- Accents -->
+            <div class="absolute -bottom-6 -right-6 h-32 w-32 bg-primary/10 blur-3xl -z-10"></div>
+            <div class="absolute -top-6 -left-6 border-t-2 border-l-2 border-primary/40 h-16 w-16"></div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- Membership Plans -->
     <section class="py-24 bg-surface-container-low">
       <div class="max-w-screen-2xl mx-auto px-8">
@@ -504,9 +579,9 @@
               <li class="flex items-center gap-3 text-sm"><span
                   class="material-symbols-outlined text-primary text-lg">check_circle</span> General Training</li>
             </ul>
-            <button
-              class="magnetic-btn w-full border border-outline-variant py-4 font-headline font-bold uppercase tracking-tighter hover:bg-white/5 transition-colors">Select
-              Plan</button>
+            <a href="https://wa.me/917751903836?text=Hi Bicon Gym, I'm interested in the Monthly plan!"
+              class="magnetic-btn w-full border border-outline-variant py-4 font-headline font-bold uppercase tracking-tighter hover:bg-white/5 transition-colors text-center">Select
+              Plan</a>
           </div>
           <!-- Yearly (Best Value) -->
           <div
@@ -531,9 +606,9 @@
               <li class="flex items-center gap-3 text-sm"><span
                   class="material-symbols-outlined text-primary text-lg">check_circle</span> Gym Kit Included</li>
             </ul>
-            <button
-              class="magnetic-btn w-full bg-primary text-on-primary-container py-4 font-headline font-bold uppercase tracking-tighter hover:scale-[1.02] transition-transform">Get
-              Started</button>
+            <a href="https://wa.me/917751903836?text=Hi Bicon Gym, I'm interested in the Yearly plan!"
+              class="magnetic-btn w-full bg-primary text-on-primary-container py-4 font-headline font-bold uppercase tracking-tighter hover:scale-[1.02] transition-transform text-center">Get
+              Started</a>
           </div>
           <!-- Quarterly -->
           <div
@@ -551,9 +626,9 @@
               <li class="flex items-center gap-3 text-sm"><span
                   class="material-symbols-outlined text-primary text-lg">check_circle</span> Access to Cardio Zone</li>
             </ul>
-            <button
-              class="magnetic-btn w-full border border-outline-variant py-4 font-headline font-bold uppercase tracking-tighter hover:bg-white/5 transition-colors">Select
-              Plan</button>
+            <a href="https://wa.me/917751903836?text=Hi Bicon Gym, I'm interested in the Quarterly plan!"
+              class="magnetic-btn w-full border border-outline-variant py-4 font-headline font-bold uppercase tracking-tighter hover:bg-white/5 transition-colors text-center">Select
+              Plan</a>
           </div>
         </div>
       </div>
@@ -568,12 +643,12 @@
           class="font-headline text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-on-primary-container mb-8">
           Start Your Fitness Journey Today</h2>
         <div class="flex flex-wrap justify-center gap-6 reveal stagger-2">
-          <button
-            class="magnetic-btn bg-background text-on-background px-12 py-5 font-headline font-extrabold uppercase text-xl rounded-md hover:scale-105 transition-all shadow-2xl">Join
-            Now</button>
-          <button
-            class="magnetic-btn border-2 border-on-primary-container text-on-primary-container px-12 py-5 font-headline font-extrabold uppercase text-xl rounded-md hover:bg-on-primary-container/10 transition-all">Call
-            Now</button>
+          <a href="https://wa.me/917751903836?text=Hi Bicon Gym, I want to join now!"
+            class="magnetic-btn bg-background text-on-background px-12 py-5 font-headline font-extrabold uppercase text-xl rounded-md hover:scale-105 transition-all shadow-2xl text-center">Join
+            Now</a>
+          <a href="https://wa.me/917751903836?text=Hi Bicon Gym, I want to call/chat about joining!"
+            class="magnetic-btn border-2 border-on-primary-container text-on-primary-container px-12 py-5 font-headline font-extrabold uppercase text-xl rounded-md hover:bg-on-primary-container/10 transition-all text-center">Call
+            Now</a>
         </div>
       </div>
     </section>
@@ -609,11 +684,12 @@
               </div>
             </div>
           </div>
-          <div class="h-[500px] bg-surface-container rounded-xl overflow-hidden grayscale reveal-scale stagger-2">
-            <img class="w-full h-full object-cover"
-              data-alt="abstract stylized map showing urban topography with neon highlights"
-              data-location="Balasore, Odisha"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpQbVHaJc6_JHF7Yo9yZc8BNHZMkBRAQ8NElsKTKMMX2_wMybfCWcHYJezmbjvdrcnItv-yiqrbSK5XfMed-TwibV_U54OLHCdUuSo6VNuOCf4kciMJYQa-QMXS92-Hkdb2vpboPxa7Ly3ndJGjpwpPAEmGEd-LFCfcbx7JWOqd_Ihl9Sn8Eo1ZVyiAesI0vNqonmtPlU0VECHKDuXDeMDyOx-tcAOPZLrBXvBT3MKx7eHW6JcbM_22zarGzPFj4NAtPD2WmvSTQ" />
+          <div
+            class="h-[500px] bg-surface-container rounded-xl overflow-hidden grayscale reveal-scale stagger-2 ring-1 ring-white/10">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3712.567884130697!2d86.92637787438451!3d21.485465371937583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1cf5005474cd77%3A0x256081bb9f5c63a3!2sBicons%20Gym%203.0!5e0!3m2!1sen!2sin!4v1774699627631!5m2!1sen!2sin"
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
@@ -674,26 +750,6 @@
       // Page Load
       setTimeout(() => document.body.classList.add('loaded'), 100);
 
-      // Cursor Logic
-      const dot = document.getElementById('cursor-dot');
-      const outline = document.getElementById('cursor-outline');
-      let mouseX = 0, mouseY = 0;
-      let outlineX = 0, outlineY = 0;
-
-      window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-      });
-
-      function animateOutline() {
-        outlineX += (mouseX - outlineX) * 0.15;
-        outlineY += (mouseY - outlineY) * 0.15;
-        outline.style.transform = `translate3d(${outlineX - 20}px, ${outlineY - 20}px, 0)`;
-        requestAnimationFrame(animateOutline);
-      }
-      animateOutline();
-
       // Magnetic Effect for Buttons
       const magneticButtons = document.querySelectorAll('.magnetic-btn');
       magneticButtons.forEach(btn => {
@@ -705,27 +761,6 @@
         });
         btn.addEventListener('mouseleave', () => {
           btn.style.transform = `translate3d(0, 0, 0)`;
-        });
-      });
-
-      // Hover effect for interactive elements
-      const interactive = document.querySelectorAll('button, a, .group');
-      interactive.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          outline.style.width = '70px';
-          outline.style.height = '70px';
-          outline.style.backgroundColor = 'rgba(142, 255, 113, 0.1)';
-          outline.style.borderColor = 'transparent';
-          dot.style.transform += ' scale(2.5)';
-          dot.style.backgroundColor = 'white';
-        });
-        el.addEventListener('mouseleave', () => {
-          outline.style.width = '40px';
-          outline.style.height = '40px';
-          outline.style.backgroundColor = 'transparent';
-          outline.style.borderColor = 'rgba(142, 255, 113, 0.4)';
-          dot.style.transform = dot.style.transform.replace(' scale(2.5)', '');
-          dot.style.backgroundColor = '#8eff71';
         });
       });
 
