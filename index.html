@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Bicon 3.0 | Kinetic Noir Performance Balasore</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "error-container": "#b92902",
+            "tertiary-container": "#17eefa",
+            "surface-variant": "#262626",
+            "secondary": "#90f9a3",
+            "on-primary-container": "#0b5800",
+            "on-error-container": "#ffd2c8",
+            "on-background": "#ffffff",
+            "on-tertiary": "#005d62",
+            "inverse-surface": "#fcf8f8",
+            "surface-tint": "#8eff71",
+            "surface-container": "#1a1919",
+            "secondary-fixed": "#90f9a3",
+            "on-error": "#450900",
+            "outline": "#777575",
+            "on-secondary-fixed": "#004a1e",
+            "on-primary-fixed-variant": "#0d6200",
+            "error-dim": "#d53d18",
+            "tertiary-fixed-dim": "#00deea",
+            "on-secondary-fixed-variant": "#006a2e",
+            "primary-fixed": "#2ff801",
+            "surface-container-highest": "#262626",
+            "on-primary": "#0d6100",
+            "primary": "#8eff71",
+            "tertiary-fixed": "#17eefa",
+            "primary-dim": "#2be800",
+            "on-tertiary-container": "#005458",
+            "on-secondary-container": "#e4ffe2",
+            "surface-container-high": "#201f1f",
+            "inverse-primary": "#106f00",
+            "error": "#ff7351",
+            "on-surface-variant": "#adaaaa",
+            "on-secondary": "#005f28",
+            "surface": "#0e0e0e",
+            "inverse-on-surface": "#565554",
+            "primary-fixed-dim": "#2be800",
+            "surface-container-lowest": "#000000",
+            "on-tertiary-fixed": "#003f43",
+            "secondary-container": "#006d2f",
+            "surface-container-low": "#131313",
+            "on-tertiary-fixed-variant": "#005e63",
+            "tertiary-dim": "#00deea",
+            "on-surface": "#ffffff",
+            "background": "#0e0e0e",
+            "tertiary": "#88f6ff",
+            "primary-container": "#2ff801",
+            "outline-variant": "#484847",
+            "secondary-dim": "#82ea96",
+            "surface-dim": "#0e0e0e",
+            "on-primary-fixed": "#064200",
+            "secondary-fixed-dim": "#82ea96",
+            "surface-bright": "#2c2c2c"
+          },
+          fontFamily: {
+            "headline": ["Space Grotesk"],
+            "body": ["Manrope"],
+            "label": ["Space Grotesk"]
+          },
+          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+        },
+      },
+    }
+  </script>
+  <style>
+    html {
+      font-size: 15px;
+      scroll-behavior: smooth;
+    }
+
+    @media (min-width: 1536px) {
+      html {
+        font-size: 16px;
+      }
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .kinetic-glow:hover {
+      box-shadow: 0 0 20px rgba(142, 255, 113, 0.3);
+    }
+
+    .text-stroke {
+      -webkit-text-stroke: 1px rgba(142, 255, 113, 0.3);
+      color: transparent;
+    }
+
+    /* Premium Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0e0e0e;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2b2b2b;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #8eff71;
+    }
+
+    /* Scroll Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-scale.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .stagger-1 {
+      transition-delay: 0.1s;
+    }
+
+    .stagger-2 {
+      transition-delay: 0.2s;
+    }
+
+    .stagger-3 {
+      transition-delay: 0.3s;
+    }
+
+    .stagger-4 {
+      transition-delay: 0.4s;
+    }
+
+    /* Custom selection */
+    ::selection {
+      background: #8eff71;
+      color: #0d6100;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+  <!-- TopNavBar Shell -->
+  <header
+    class="fixed top-0 w-full z-50 bg-[#0e0e0e]/80 backdrop-blur-xl bg-gradient-to-b from-[#0e0e0e] to-transparent shadow-[0_0_20px_rgba(142,255,113,0.1)]">
+    <nav class="flex justify-between items-center px-8 py-6 max-w-screen-2xl mx-auto">
+      <div class="text-2xl font-extrabold tracking-tighter text-[#8eff71] italic font-headline uppercase">
+        Bicon 3.0
+      </div>
+      <div class="hidden md:flex items-center gap-10">
+        <a class="font-headline font-extrabold uppercase tracking-tighter text-[#8eff71] border-b-2 border-[#8eff71] pb-1"
+          href="#">Home</a>
+        <a class="font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors"
+          href="#programs">Programs</a>
+        <a class="font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors"
+          href="#trainers">Trainers</a>
+        <a class="font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors"
+          href="#gallery">Gallery</a>
+        <a class="font-headline font-extrabold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors"
+          href="#contact">Contact</a>
+      </div>
+      <button
+        class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-extrabold uppercase tracking-tighter px-6 py-2 rounded-md hover:scale-105 hover:shadow-[0_0_15px_rgba(142,255,113,0.3)] duration-300 active:scale-95 transition-all">
+        Join Now
+      </button>
+    </nav>
+  </header>
+  <main>
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full flex items-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img class="w-full h-full object-cover grayscale brightness-50"
+          data-alt="dramatic wide shot of a high-end dark gym with industrial lighting and a person performing heavy deadlifts in silhouette"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6C0DAdlc8dlJdJoWO1z_tFGNLzZ319DntTq7dzTY28O3Oesfu6ECmeg4BQ8rYZnqKY-QlaPfTQ8Idn5OCl6uqci8yntKRjggfp3UHTfqsW8ViNn3w7Ma1nERGss-qg0CmBGqufz5McKYOLbLBxEnj9QmvPMGL8eNtq2GnJkAPTbfjFZUUwRqul4ef6RJG3zo693_OEFSlnSUz-2kg3a97aYLdfojc9_gN75arpRvNsLH_Abh3PJyz4cxngQDzz-YCp2rkoF7Fxw" />
+        <div class="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent"></div>
+      </div>
+      <div class="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
+        <div class="max-w-3xl">
+          <h1 class="font-headline text-6xl md:text-8xl font-extrabold uppercase tracking-tighter leading-[0.9] mb-6">
+            Transform <br />
+            <span class="text-primary italic">Your Body.</span><br />
+            Build Power.
+          </h1>
+          <p class="text-on-surface-variant text-xl md:text-2xl font-light mb-10 max-w-xl">
+            Train at Balasore's most advanced fitness center. Engineered for performance, designed for results.
+          </p>
+          <div class="flex flex-wrap gap-6 reveal stagger-3">
+            <button
+              class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-extrabold uppercase tracking-tighter px-10 py-4 rounded-md hover:scale-105 transition-all text-lg shadow-[0_10px_20px_rgba(142,255,113,0.2)]">
+              Join Now
+            </button>
+            <button
+              class="border border-outline-variant text-on-background font-headline font-extrabold uppercase tracking-tighter px-10 py-4 rounded-md hover:bg-surface-bright transition-all text-lg backdrop-blur-sm">
+              Explore Programs
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute bottom-12 left-8 md:flex hidden gap-12 text-sm uppercase tracking-[0.2em] font-headline text-on-surface-variant">
+        <span>Power</span>
+        <span>/</span>
+        <span>Speed</span>
+        <span>/</span>
+        <span>Precision</span>
+      </div>
+    </section>
+    <!-- Why Choose Bicon 3.0 -->
+    <section class="py-24 bg-surface-container-low">
+      <div class="max-w-screen-2xl mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-1">
+          <div class="bg-surface p-12 hover:bg-surface-bright transition-colors group reveal stagger-1">
+            <span
+              class="material-symbols-outlined text-primary text-4xl mb-6 group-hover:scale-110 transition-transform">workspace_premium</span>
+            <h3 class="font-headline text-xl font-bold uppercase mb-2">Certified Trainers</h3>
+            <p
+              class="text-on-surface-variant text-sm border-l-2 border-primary/20 pl-4 group-hover:border-primary transition-colors">
+              Expert guidance from national level fitness coaches.</p>
+          </div>
+          <div class="bg-surface p-12 hover:bg-surface-bright transition-colors group reveal stagger-2">
+            <span
+              class="material-symbols-outlined text-primary text-4xl mb-6 group-hover:scale-110 transition-transform">fitness_center</span>
+            <h3 class="font-headline text-xl font-bold uppercase mb-2">Modern Equipment</h3>
+            <p
+              class="text-on-surface-variant text-sm border-l-2 border-primary/20 pl-4 group-hover:border-primary transition-colors">
+              Hammer Strength and Life Fitness precision machines.</p>
+          </div>
+          <div class="bg-surface p-12 hover:bg-surface-bright transition-colors group reveal stagger-3">
+            <span
+              class="material-symbols-outlined text-primary text-4xl mb-6 group-hover:scale-110 transition-transform">person_celebrate</span>
+            <h3 class="font-headline text-xl font-bold uppercase mb-2">Personal Training</h3>
+            <p
+              class="text-on-surface-variant text-sm border-l-2 border-primary/20 pl-4 group-hover:border-primary transition-colors">
+              Tailored nutrition and workout plans for your DNA.</p>
+          </div>
+          <div class="bg-surface p-12 hover:bg-surface-bright transition-colors group reveal stagger-4">
+            <span
+              class="material-symbols-outlined text-primary text-4xl mb-6 group-hover:scale-110 transition-transform">sanitizer</span>
+            <h3 class="font-headline text-xl font-bold uppercase mb-2">Clean &amp; Hygienic</h3>
+            <p
+              class="text-on-surface-variant text-sm border-l-2 border-primary/20 pl-4 group-hover:border-primary transition-colors">
+              Hospital-grade cleaning standards for your safety.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Programs Bento -->
+    <section class="py-24 bg-background" id="programs">
+      <div class="max-w-screen-2xl mx-auto px-8">
+        <div class="flex justify-between items-end mb-16">
+          <div>
+            <h2 class="font-headline text-5xl font-extrabold uppercase tracking-tighter">Elite <span
+                class="text-primary">Programs</span></h2>
+            <p class="text-on-surface-variant mt-4">Select your path to peak physical condition.</p>
+          </div>
+          <div class="hidden md:block font-headline text-8xl text-stroke font-extrabold">BICON</div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="md:col-span-2 group relative h-[400px] overflow-hidden rounded-xl reveal stagger-1">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              data-alt="muscular athlete lifting heavy barbells in a dark moodily lit gym environment with sweat and intensity"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuACe5hjQ9VASdDoVkzC4M8oM1RyYmO97h-bs4qvEHXt9dXJqBpi8KWO64kBMFH9aNujaQ1RxLvjze9V3gMruvE2Tpn_IXBX99HOlAUaT6SQB-4LrpYLrZna65K7-WVFujdRgfg3-It8gcGtRoW4q0NXdE3ExXGxb4GafJyeHhGRV5oXGFNn9wEXkHucfXut9dnldoO13cnUqq3KVU-lQydhLK7xbg6eNOqEdect_AkaK2SI62kjdBYvr-xh62S2x2bk4d1ZFyN49Q" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-80"></div>
+            <div class="absolute bottom-0 p-8">
+              <span
+                class="bg-primary text-on-primary-container px-3 py-1 text-xs font-headline font-bold uppercase rounded-sm mb-4 inline-block">Pro
+                Level</span>
+              <h3 class="font-headline text-3xl font-bold uppercase">Weight Training</h3>
+            </div>
+          </div>
+          <div class="group relative h-[400px] overflow-hidden rounded-xl reveal stagger-2">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              data-alt="focused personal training session with trainer correcting the form of a female athlete during lunges"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVerFEOax30ck1yoriGBriGM8YsXa-DCxNJTBcbGxocMln5Z1u7v5RmNyOEQyJSIZws9KR1PHBbicCgJaeezOzM4bBRGSZyqd2_rzm23b9VAVxw9bs25e0_LiJ9uOjoOaFoXAxC1rWEKZzKGDHPv6muYgThKIUVTpQHl8HffEM-gVLbUn5yGff3r3nS8uwGycsa2SmiKhRGJpxahekzVjgkCcP59dR2gJRNhPYFlsSmh3kArewW7rwpon2qxcvC2Kxs8Usog7uXg" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-80"></div>
+            <div class="absolute bottom-0 p-8">
+              <h3 class="font-headline text-3xl font-bold uppercase">Personal Training</h3>
+            </div>
+          </div>
+          <div class="group relative h-[400px] overflow-hidden rounded-xl reveal stagger-1">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              data-alt="woman running on a treadmill with high intensity in a modern gym with neon green lighting accents"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKAo_TSCJ7gKdU0NgVFyCubfXWBai6AlC8WEv-j6J9ST-KvKfKEWDO_JzisWodGExxg65YwKsdz4AbRQY0S5ZrvkOpr-5NtRTJDw2gp91AqhydKIGxLYmKM57uZbZFDPMrCR1bBz-USEvQEsopdu4yIqR4rfW1g9fB6H-0s_BIZW4SKwH0UzFKuMZJko2y1gayREOsKsKA5d5jjFP_WIl9iWkv7zw-dkPAVdMzXE3RbJQD15J5I5lnYvwec0soGFG8hcJtN5rRfw" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-80"></div>
+            <div class="absolute bottom-0 p-8">
+              <h3 class="font-headline text-3xl font-bold uppercase">Cardio Fitness</h3>
+            </div>
+          </div>
+          <div class="md:col-span-2 group relative h-[400px] overflow-hidden rounded-xl reveal stagger-2">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              data-alt="dynamic shot of functional training equipment including kettlebells and ropes in a high-tech gym space"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuATnhAa49ddgdVzuZHXLcq1hO_J7iJVXVJWAs8i4ZA-Xoqu0MR8Fwu1Wq7cN12HM61qV82QCCSnDDWfmDckuM1hQ1IiI6yC9_-55YYqmuGygHWd-1HR5g9p21bTdLqty7rqjo40U5SUcCX-1MLZU-nhVj_UUogh4SBkHyxHiohuz-nAWrMzEeVXv86DbstodMvPA8df93DDhEkh1JpuMDs2H93ugSEPuC3M1JsEFWXemseSvc_APvtr1ciLbLxTUzFoz8TiXghqVw" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-80"></div>
+            <div class="absolute bottom-0 p-8">
+              <h3 class="font-headline text-3xl font-bold uppercase">Strength &amp; Conditioning</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Trainers -->
+    <section class="py-24 bg-surface-container-low overflow-hidden" id="trainers">
+      <div class="max-w-screen-2xl mx-auto px-8">
+        <h2 class="font-headline text-5xl font-extrabold uppercase tracking-tighter mb-16 text-center">The <span
+            class="text-primary italic">Engineers</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div class="relative group reveal stagger-1">
+            <div
+              class="aspect-[3/4] overflow-hidden rounded-lg mb-6 bg-surface-container border border-white/5 group-hover:border-primary/30 transition-colors">
+              <img
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                data-alt="portrait of a muscular male fitness trainer standing confidently with arms crossed in a dark gym"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-kCOLn1DzunTJ_UWkAJ4l2us4EYCz8GCTDkLbAjUFyHMZcGVNKNHsbAjLIiXsH3fZvSkDdmJVTHGIMKuNSwjh00WGA4whkGoCBwxGFuFMbf4jOHN1yBMA_LxgOOJ1PffZmZpmWvoCFbmRMzuDq09nFo7UpLUPHAay3oTakROs8-phHvvwslR-ZSxthIZrFDaME3NZvW698UenRM6ZftUsaqs5BpjhwELuBQ83RGFXT4w1UvMBG3nmABNJ2kqsw0e2FWL6-9HvxQ" />
+            </div>
+            <div class="absolute -right-4 top-8 rotate-90 origin-left">
+              <span class="font-headline font-extrabold text-4xl text-stroke opacity-30">COACH</span>
+            </div>
+            <h4 class="font-headline text-2xl font-bold uppercase group-hover:text-primary transition-colors">Vikram
+              Singh</h4>
+            <p class="text-primary font-headline uppercase text-sm tracking-widest mt-1">Strength Coach</p>
+          </div>
+          <div class="relative group reveal stagger-2">
+            <div
+              class="aspect-[3/4] overflow-hidden rounded-lg mb-6 bg-surface-container border border-white/5 group-hover:border-primary/30 transition-colors">
+              <img
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                data-alt="professional female fitness trainer with athletic build looking focused in a gym setting"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZRSquepZhXA_jlGQgMXSzsHOKSl6OE7s2-q_FuF3owe6xpStF_sfBdfimaJ45g_x8riVFTq_NcBJgiQyroTMuiwNqE2Yeuu3J7eDaypffvGcrhsUZsoqHZkpnAUQovQGF-wEsEK-0onmsDk1E0YqUOxXC8ihiNaoKTPN6SDUMnSAiazmAOfljax0qkIK0UzJHGj1v8sIy_XXTSPuOh-z9YMAyso6EUSTGLrUig8QxG0jNEDhl2YYcHQMWuAog41Dk-3VsyXWCOQ" />
+            </div>
+            <h4 class="font-headline text-2xl font-bold uppercase group-hover:text-primary transition-colors">Ananya
+              Rout</h4>
+            <p class="text-primary font-headline uppercase text-sm tracking-widest mt-1">Fat Loss Expert</p>
+          </div>
+          <div class="relative group reveal stagger-3">
+            <div
+              class="aspect-[3/4] overflow-hidden rounded-lg mb-6 bg-surface-container border border-white/5 group-hover:border-primary/30 transition-colors">
+              <img
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                data-alt="senior male fitness coach with intense expression and tattoos, specializing in powerlifting"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeeNdSl1NNRJJ1r1iJzWcNVChFL2e5HnJQeUIEibsB5mjMlkWty6lSA0M-kb-Eq5YCmc1vL29Wfc7qsQeo4-ReuAaJrCOBFc3YP7cA7Tb61JdnzllFJnjpQvpsp_DNrHEMJLDkyTmi57rsAOce2Ww9OLViS5NTeJbbpTAXv_ZJpVhlKBg92FMfig3fFDZP0acj3b2TIhCrzUM0WVCFp_LzVl0C8J4qV_jzxuyTLDaTGItNYELeGdsfIU02mHPqCFbPtaOuvZGEhQ" />
+            </div>
+            <h4 class="font-headline text-2xl font-bold uppercase group-hover:text-primary transition-colors">Rajesh
+              Mohanty</h4>
+            <p class="text-primary font-headline uppercase text-sm tracking-widest mt-1">Powerlifting Specialist</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Transformations -->
+    <section class="py-24 bg-background relative overflow-hidden">
+      <div class="max-w-screen-2xl mx-auto px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="font-headline text-6xl font-extrabold uppercase tracking-tighter mb-4">Real Results. <span
+              class="text-primary">Real People.</span></h2>
+          <p class="text-on-surface-variant max-w-xl mx-auto">See the physical evolutions achieved by our members
+            through discipline and Bicon performance science.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-surface-container p-8 rounded-xl border border-white/5 reveal stagger-1">
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <img
+                class="rounded aspect-[4/5] object-cover bg-surface-bright hover:scale-[1.02] transition-transform duration-500"
+                data-alt="side-by-side comparison image of a man's fitness journey, before and after muscle gain"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGoX_Xx3zXcN3sj5xg3Btw_vC_ozfr1lTExpf7yWY4h9cLSWW5QEcTOc3Qr0RUieNApkBULQCqX4qr-0Lf6Wbp3Kv5IomWWHrXwa3VuYc9eyaNOQg8ys0unHbuInQfFWDnHRj-0FNNdUSJ8Bdz0Zs5OmpoANloCnScTfpboEK99h_-yjgGWfNOl5W836IzdDKHGm12wFQYMTVGyNShm5zjP4SVU8y2fzB1jQamuj1KBHuGfNO9bj1u1FAd2VZy13_pSBEjDKvPvw" />
+              <img
+                class="rounded aspect-[4/5] object-cover bg-surface-bright hover:scale-[1.02] transition-transform duration-500"
+                data-alt="transformation photo of an athlete showing significant physical progress in strength and definition"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEXUyS73mGv3coBo9NcfgxY0R7AC5atqAtYb5K_NP6F45MTh5lKNKV7iATPcY7Q6EldWPaB5Za3FfOlqkUykfOcbFZ06-EIpUQmYiw1Gr_Rm_QtvBIXgeo3WLHjiANGXCvh3B-U7SvtpMuHQ-yJr-Z2hNMZfPlCaqHM_NxX673BbCV_fusXXwgRwbwXLlrJ9RktS2fUrQhb6sAc7d7uADAkmRZ1WKb6h1gKcdYoCn3YwLX2bG8DkzCCce7BxK9LwS2WYGFZnL37Q" />
+            </div>
+            <p class="italic text-on-surface-variant mb-4">"Bicon 3.0 changed my perspective on fitness. The personal
+              training program in Balasore is world-class."</p>
+            <h5 class="font-headline font-bold uppercase text-primary">- Rahul M.</h5>
+          </div>
+          <div class="bg-surface-container p-8 rounded-xl border border-white/5 reveal stagger-2">
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <img
+                class="rounded aspect-[4/5] object-cover bg-surface-bright hover:scale-[1.02] transition-transform duration-500"
+                data-alt="before after fitness transformation showing weight loss and toned physique of a woman"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgI7h8MDc8uIzuh3G1FXHrPKygTI37I2yCfNL3Q2dHw-vDgXSwVy5fgZfT-nU6qxqjq09HDKYakABzjy5ElSySxijLtg5FImgwgF3D1LviNLvxpG47w9WH4seNMf0v190KS9QMlrYoxXxNICrilLv4RhO8tRZGp2vrv6v0CYpucAUnNf4UeOZ1_ZU3G8WcHKFCZwLE_320JBvpeR05U5IquP6ewnUgUgtcdPpz0E7QmJMETkzz9tdCGioobN_8NWgoIYjNPjhNMg" />
+              <img
+                class="rounded aspect-[4/5] object-cover bg-surface-bright hover:scale-[1.02] transition-transform duration-500"
+                data-alt="high quality gym portrait of a member celebrating their fitness results"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9KImvdfwxf6NPs0czUuBzv7EUMGOGew_AsvxP_AVqnM21OP1MV0vX7y_yHCnU3AB4GpYxDx8oxuKOWIKDSOdbpc61eXw-AxSmlpiQ9uqqFaQwh9CveIlMfCTVK9itcOfSACT4JcsJCyuZ8JJdEuuEPhRoueSPwjnKi1vNC6wozUf6XDKWx67zhygqY-U8vfC8GV9GwjZvtBmJ85HP4apZp46ze2EhU54N5lX94WjI92OwjTyohQeVqC6dG6HkLhMGD_6-z7DSiA" />
+            </div>
+            <p class="italic text-on-surface-variant mb-4">"Lost 15kg in 3 months with the Fat Loss Program. The
+              environment is incredibly motivating."</p>
+            <h5 class="font-headline font-bold uppercase text-primary">- Priya S.</h5>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Membership Plans -->
+    <section class="py-24 bg-surface-container-low">
+      <div class="max-w-screen-2xl mx-auto px-8">
+        <h2 class="font-headline text-5xl font-extrabold uppercase tracking-tighter mb-16 text-center">Choose Your <span
+            class="text-primary italic">Tier</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Monthly -->
+          <div
+            class="bg-surface p-12 border border-white/5 rounded-xl hover:border-primary/50 transition-all flex flex-col reveal reveal-scale stagger-1">
+            <h3 class="font-headline text-2xl font-bold uppercase mb-2">Monthly</h3>
+            <div class="flex items-baseline gap-1 mb-8">
+              <span class="text-4xl font-headline font-extrabold text-on-background">₹1,999</span>
+              <span class="text-on-surface-variant">/mo</span>
+            </div>
+            <ul class="space-y-4 mb-12 flex-grow">
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> All Gym Equipment Access
+              </li>
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> Locker Room &amp; Showers
+              </li>
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> General Training</li>
+            </ul>
+            <button
+              class="w-full border border-outline-variant py-4 font-headline font-bold uppercase tracking-tighter hover:bg-white/5 transition-colors">Select
+              Plan</button>
+          </div>
+          <!-- Yearly (Best Value) -->
+          <div
+            class="bg-surface p-12 border-2 border-primary rounded-xl relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(142,255,113,0.15)] flex flex-col reveal reveal-scale stagger-2">
+            <div
+              class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-on-primary-container px-6 py-1 font-headline font-extrabold uppercase text-xs rounded-full">
+              Best Value</div>
+            <h3 class="font-headline text-2xl font-bold uppercase mb-2">Yearly</h3>
+            <div class="flex items-baseline gap-1 mb-8">
+              <span class="text-4xl font-headline font-extrabold text-primary">₹14,999</span>
+              <span class="text-on-surface-variant">/yr</span>
+            </div>
+            <ul class="space-y-4 mb-12 flex-grow">
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> Everything in Quarterly
+              </li>
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> 2 Personal Training
+                Sessions</li>
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> Free Diet Consultation</li>
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> Gym Kit Included</li>
+            </ul>
+            <button
+              class="w-full bg-primary text-on-primary-container py-4 font-headline font-bold uppercase tracking-tighter hover:scale-[1.02] transition-transform">Get
+              Started</button>
+          </div>
+          <!-- Quarterly -->
+          <div
+            class="bg-surface p-12 border border-white/5 rounded-xl hover:border-primary/50 transition-all flex flex-col reveal reveal-scale stagger-3">
+            <h3 class="font-headline text-2xl font-bold uppercase mb-2">Quarterly</h3>
+            <div class="flex items-baseline gap-1 mb-8">
+              <span class="text-4xl font-headline font-extrabold text-on-background">₹4,999</span>
+              <span class="text-on-surface-variant">/3mo</span>
+            </div>
+            <ul class="space-y-4 mb-12 flex-grow">
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> Everything in Monthly</li>
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> 1 Fitness Assessment</li>
+              <li class="flex items-center gap-3 text-sm"><span
+                  class="material-symbols-outlined text-primary text-lg">check_circle</span> Access to Cardio Zone</li>
+            </ul>
+            <button
+              class="w-full border border-outline-variant py-4 font-headline font-bold uppercase tracking-tighter hover:bg-white/5 transition-colors">Select
+              Plan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Final CTA Block -->
+    <section class="py-24 bg-primary relative overflow-hidden reveal">
+      <div
+        class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20">
+      </div>
+      <div class="max-w-screen-2xl mx-auto px-8 relative z-10 text-center">
+        <h2
+          class="font-headline text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-on-primary-container mb-8">
+          Start Your Fitness Journey Today</h2>
+        <div class="flex flex-wrap justify-center gap-6 reveal stagger-2">
+          <button
+            class="bg-background text-on-background px-12 py-5 font-headline font-extrabold uppercase text-xl rounded-md hover:scale-105 transition-all shadow-2xl">Join
+            Now</button>
+          <button
+            class="border-2 border-on-primary-container text-on-primary-container px-12 py-5 font-headline font-extrabold uppercase text-xl rounded-md hover:bg-on-primary-container/10 transition-all">Call
+            Now</button>
+        </div>
+      </div>
+    </section>
+    <!-- Location & Contact -->
+    <section class="py-24 bg-background" id="contact">
+      <div class="max-w-screen-2xl mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+          <div class="reveal">
+            <h2 class="font-headline text-5xl font-extrabold uppercase tracking-tighter mb-10">Locate <span
+                class="text-primary italic">Us</span></h2>
+            <div class="space-y-12">
+              <div class="flex gap-6 reveal stagger-1">
+                <span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+                <div>
+                  <h4 class="font-headline font-bold uppercase mb-2">Address</h4>
+                  <p class="text-on-surface-variant">Bicon 3.0, Near Station Chowk, Balasore, Odisha - 756001</p>
+                </div>
+              </div>
+              <div class="flex gap-6 reveal stagger-2">
+                <span class="material-symbols-outlined text-primary text-3xl">schedule</span>
+                <div>
+                  <h4 class="font-headline font-bold uppercase mb-2">Opening Hours</h4>
+                  <p class="text-on-surface-variant">Mon - Sat: 05:00 AM - 10:00 PM<br />Sun: 06:00 AM - 12:00 PM</p>
+                </div>
+              </div>
+              <div class="flex gap-6 reveal stagger-3">
+                <span class="material-symbols-outlined text-primary text-3xl">call</span>
+                <div>
+                  <h4 class="font-headline font-bold uppercase mb-2">Phone</h4>
+                  <a class="text-on-surface-variant hover:text-primary transition-colors" href="tel:+919876543210">+91
+                    98765 43210</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="h-[500px] bg-surface-container rounded-xl overflow-hidden grayscale reveal-scale stagger-2">
+            <img class="w-full h-full object-cover"
+              data-alt="abstract stylized map showing urban topography with neon highlights"
+              data-location="Balasore, Odisha"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpQbVHaJc6_JHF7Yo9yZc8BNHZMkBRAQ8NElsKTKMMX2_wMybfCWcHYJezmbjvdrcnItv-yiqrbSK5XfMed-TwibV_U54OLHCdUuSo6VNuOCf4kciMJYQa-QMXS92-Hkdb2vpboPxa7Ly3ndJGjpwpPAEmGEd-LFCfcbx7JWOqd_Ihl9Sn8Eo1ZVyiAesI0vNqonmtPlU0VECHKDuXDeMDyOx-tcAOPZLrBXvBT3MKx7eHW6JcbM_22zarGzPFj4NAtPD2WmvSTQ" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Footer Shell -->
+  <footer class="bg-[#0e0e0e] w-full border-t border-white/5 spacing-24 pt-20 pb-10">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xl font-extrabold text-[#8eff71] uppercase tracking-widest font-headline italic mb-6">
+          Bicon 3.0
+        </div>
+        <p class="font-['Manrope'] text-sm tracking-wide text-gray-500 max-w-xs">
+          Balasore's premier destination for high-performance fitness. Kinetic Noir aesthetic meets biological
+          excellence.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col gap-3">
+          <h5 class="font-headline text-xs font-bold text-on-surface uppercase tracking-[0.2em] mb-2">Company</h5>
+          <a class="font-['Manrope'] text-sm tracking-wide text-gray-500 hover:text-[#8eff71] transition-colors duration-200"
+            href="#">Careers</a>
+          <a class="font-['Manrope'] text-sm tracking-wide text-gray-500 hover:text-[#8eff71] transition-colors duration-200"
+            href="#">Privacy Policy</a>
+          <a class="font-['Manrope'] text-sm tracking-wide text-gray-500 hover:text-[#8eff71] transition-colors duration-200"
+            href="#">Terms of Service</a>
+        </div>
+        <div class="flex flex-col gap-3">
+          <h5 class="font-headline text-xs font-bold text-on-surface uppercase tracking-[0.2em] mb-2">Community</h5>
+          <a class="font-['Manrope'] text-sm tracking-wide text-gray-500 hover:text-[#8eff71] transition-colors duration-200"
+            href="#">Membership Rules</a>
+          <a class="font-['Manrope'] text-sm tracking-wide text-gray-500 hover:text-[#8eff71] transition-colors duration-200"
+            href="#">Events</a>
+          <a class="font-['Manrope'] text-sm tracking-wide text-gray-500 hover:text-[#8eff71] transition-colors duration-200"
+            href="#">FAQs</a>
+        </div>
+      </div>
+      <div>
+        <h5 class="font-headline text-xs font-bold text-on-surface uppercase tracking-[0.2em] mb-6">Socials</h5>
+        <div class="flex gap-6">
+          <a class="text-gray-500 hover:text-primary transition-colors" href="#"><span
+              class="material-symbols-outlined">public</span></a>
+          <a class="text-gray-500 hover:text-primary transition-colors" href="#"><span
+              class="material-symbols-outlined">share</span></a>
+          <a class="text-gray-500 hover:text-primary transition-colors" href="#"><span
+              class="material-symbols-outlined">camera</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-8 mt-20">
+      <p class="font-['Manrope'] text-sm tracking-wide text-gray-500 border-t border-white/5 pt-8">
+        © 2024 Bicon 3.0 Balasore. Kinetic Noir Performance.
+      </p>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, observerOptions);
+
+      const revealElements = document.querySelectorAll('.reveal, .reveal-scale');
+      revealElements.forEach(el => observer.observe(el));
+
+      // Smooth reveal for images
+      const images = document.querySelectorAll('img');
+      images.forEach(img => {
+        img.style.transition = 'filter 1s ease-out';
+        if (img.complete) {
+          img.style.filter = 'grayscale(0)';
+        } else {
+          img.style.filter = 'grayscale(1) brightness(0.5)';
+          img.addEventListener('load', () => {
+            img.style.filter = 'grayscale(0)';
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
